@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <!-- <h1><%= title %></h1> -->
+   <!--  <p>Welcome to <%= title %></p> -->
+   <div style="text-align: center; margin-bottom:40px"> <p>where are you browsing?</p> </div>
+   <div style="text-align: center" id="dataviz"><!-- <span id="editfraction" style="color:red; font-size:2em; text-align: center">loading...</span> --></div>
+    
+
+  <div style="text-align: center; margin-top:50px">
+        <label for="name">URL:</label>
+        <input type="text" name="name" id="OneNewUrl"/>
+        <button id="submitURL">submit</button>
+  </div>
+
+
+  <div style="text-align:center; margin-top:10px">
+    
+    <p style="font-size:0.8em; margin-bottom:20px"><a href="#" id="showUpload">locate</a> your entire Chrome browsing history</p>
+    
+    <p class="upload_fields" style="font-size:0.8em; ">-> on a mac, <span style="color: #ff1a1a">shut down Chrome</span>, <span style="color: #ff1a1a">open your terminal</span> and <span style="color: #ff1a1a">paste</span>:<br></p>
+
+    <div class="upload_fields"><div style="background-color:#e6e6e6; margin-top:20px; margin-bottom:18px; padding-top:1px; padding-bottom:1px; max-width:700px; margin-left:auto; margin-right:auto" ><p style="font-size:0.7em"> cd Desktop && sqlite3 ~/Library/Application\ Support/Google/Chrome/Default/History 'select url from "urls"' > urls.txt</p></div></div>
+    
+    <p class="upload_fields" style="font-size:0.8em;">-> find the <span style="color: #ff1a1a">url.txt file on your Desktop</span> and upload it here:<br></p>
+    
+    <input class="upload_fields" style="text-align:center; margin-top:20px;" type="file" id="files"></input>
+    <button class="upload_fields" id="upload">submit</button>
+    <div style="margin-top:10px">
+    <br><a class="upload_fields"  style="font-size:0.8em;" href="#">save graphic as a large image</a>
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+	<script type="text/javascript" src="https://d3js.org/d3.v3.js" charset="utf-8"></script>
+	<script type="text/javascript" src="javascripts/topojson.v1.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script type="text/javascript" src="javascripts/underscore.js"></script>
+  <script type="text/javascript" src="javascripts/geo_browsing.js"></script>
+  </body>
+</html>
