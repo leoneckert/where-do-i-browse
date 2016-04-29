@@ -147,6 +147,7 @@ function addToHostArray(host, callback){
 
 }
 var serverIP = "localhost:3000"
+
 function resolveIP(host, callback){
   xmlhttp = new XMLHttpRequest();
   xmlhttp.open("GET", "http://" + serverIP + "/resolve/ip?host=" + host, true);
@@ -189,6 +190,37 @@ uploadButton.on('click', function() {
     } 
 });
 
+function draw_list(list){
+
+  coordinates = list.split("//");
+  console.log('this is the list:');
+  _.each(coordinates, function(elem){
+    console.log(elem);
+
+    var lat = elem.slice(0, elem.indexOf("/"));
+    var lon = elem.substring(elem.indexOf("/") + 1);
+    
+    // console.log(lat);
+    // console.log(lon);
+    lat = parseFloat(lat);
+    lon = parseFloat(lon);
+
+    var NEWlon = projection([lon, lat])[0];
+    var NEWlat = projection([lon, lat])[1];
+   
+    svg.append('ellipse')
+            .attr('cx', NEWlon)
+              .attr('cy', NEWlat)
+              .attr('rx', 3)
+              .attr('ry', 3)
+              .style('fill', 'red');
+  });
+
+
+
+
+}
+
 function processFile(e) {
     var file = e.target.result
     // console.log(file);
@@ -216,23 +248,23 @@ function processFile(e) {
     var first = true
     for(host in hosts){
       if(first){
-         string_to_send = string_to_send + "?host" + String(c) + "a=" + host;
+         string_to_send = string_to_send + "?host" + String(c) + "=" + host;
       }else{
-        string_to_send = string_to_send + "&host" + String(c) + "a=" + host;
+        string_to_send = string_to_send + "&host" + String(c) + "=" + host;
       }
      
       c += 1;
       first = false
     }
-    // console.log(string_to_send);
+    console.log(string_to_send);
     xmlhttp = new XMLHttpRequest();
     xmlhttp.open("GET", string_to_send, true);
     xmlhttp.onreadystatechange=function(){
         if (xmlhttp.readyState==4 && xmlhttp.status==200){
-            var latlon = String(xmlhttp.responseText);
-            console.log("latlon of host: is: " + latlon);
+            var latlon_list = String(xmlhttp.responseText);
+            console.log("latlon_list of host: is: " + latlon_list);
             // callback(latlon);
-
+            draw_list(latlon_list);
 
             /// process the big string here (tomorrow)
 
