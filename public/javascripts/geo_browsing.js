@@ -7,30 +7,13 @@ var projection = d3.geo.mercator()
 
 var path = d3.geo.path()
     .projection(projection);
-// var graticule = d3.geo.graticule();
 
 var svg = d3.select("#dataviz").append("svg")
     .attr("width", width)
     .attr("height", height);
 
-// svg.append("path")
-//     .datum(graticule)
-//     .attr("class", "graticule")
-//     .attr("d", path);
-
-
-function get_data(input_data, callback){
-  _.each(input_data, function(a, b){
-    // console.log(a.network);
-    data[a.network] = [a.latitude, a.longitude];
-    // console.log(b);
-    // console.log('---')
-  });
-  callback("ready!")
-}
 
 d3.json("javascripts/world-50m.json", function(error, world) {
-  
   if (error) throw error;
   svg.insert("path")
       .datum(topojson.feature(world, world.objects.land))
@@ -41,29 +24,8 @@ d3.json("javascripts/world-50m.json", function(error, world) {
       .attr("class", "boundary")
       .attr("d", path);
 
-  // new york:
-  // var real_lat = 40.716628
-  // var real_lon = -74.005841
-  // berlin:
-  // var real_lat = 52.290158
-  // var real_lon = 13.482706
-  // hong kong:
-  // var real_lat = 22.273769
-  // var real_lon = 114.196539
-
-  // var lon = projection([real_lon, real_lat])[0];
-  // var lat = projection([real_lon, real_lat])[1];
-
-  // svg.append('ellipse')
-  // 				.attr('cx', lon)
-  // 			    .attr('cy', lat)
-  // 			    .attr('rx', 3)
-  // 			    .attr('ry', 3)
-  // 			    .style('fill', 'red');
-
-
-
 });
+
 
 $("#showUpload").on('click', function(){
   $(".upload_fields").css( "display", "inline" );
@@ -266,23 +228,11 @@ function processFile(e) {
             // callback(latlon);
             draw_list(latlon_list);
 
-            /// process the big string here (tomorrow)
-
         }
     }
     xmlhttp.send();
 }
 
-// xmlhttp = new XMLHttpRequest();
-//           xmlhttp.open("GET", "http://" + serverIP + "/resolve/ip?host=" + results[r], true);
-//           xmlhttp.onreadystatechange=function(){
-//               if (xmlhttp.readyState==4 && xmlhttp.status==200){
-//                   var latlon = String(xmlhttp.responseText);
-//                   console.log("latlon of host: " + host + " is: " + latlon);
-//                   // callback(latlon);
-//               }
-//           }
-//           xmlhttp.send();
 
 
 
