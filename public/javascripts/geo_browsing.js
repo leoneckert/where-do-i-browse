@@ -27,8 +27,18 @@ d3.json("javascripts/world-50m.json", function(error, world) {
 });
 
 
+var show_upload = false
 $("#showUpload").on('click', function(){
-  $(".upload_fields").css( "display", "inline" );
+  if(!show_upload){
+    $(".upload_fields").css( "display", "inline" );
+    show_upload = true;
+
+  }else{
+    $(".upload_fields").css( "display", "none" );
+
+    show_upload = false;
+  }
+  
 });
 
 $("#submitURL").on('click', function(){
